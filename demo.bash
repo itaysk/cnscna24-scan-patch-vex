@@ -27,3 +27,6 @@ vex=$(mktemp)
 regctl artifact get --subject "$IMAGE" --filter-artifact-type example/openvex --latest > "$vex"
 # scan with fetched vex
 trivy image --severity HIGH --vex "$vex" --show-suppressed "$IMAGE"
+
+## cleanup
+rm "$vex"
