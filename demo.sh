@@ -48,15 +48,19 @@ echo '|__________________________________|'
 slow 'export BASE_IMAGE=toddysm/python:3.12.2
 $ export BASE_IMAGE_FILE_NAME=python-3.12.2
 $ export APP_REGISTRY=ghcr.io/toddysm
-$ export APP_IMAGE=${APP_REGISTRY}/flasksample:1.0
+$ export APP_IMAGE="$APP_REGISTRY/flasksample:1.0"
 $ export APP_IMAGE_FILE_NAME=flaskapp-1.0
-$ mkdir vex'
+$ export PATCHED_IMAGE="$APP_REGISTRY/flasksample:1.0-patched"
+$ mkdir vex
+$ mkdir vuln-reports'
 export BASE_IMAGE="toddysm/python:3.12.2"
 export BASE_IMAGE_FILE_NAME=python-3.12.2
 export APP_REGISTRY="ghcr.io/toddysm"
 export APP_IMAGE="$APP_REGISTRY/flasksample:1.0"
 export APP_IMAGE_FILE_NAME=flaskapp-1.0
+export PATCHED_IMAGE="$APP_REGISTRY/flasksample:1.0-patched"
 mkdir vex
+mkdir vuln-reports
 clear
 echo ' ___________________________________________'
 echo '|  ______________________________________  |'
@@ -84,80 +88,80 @@ echo '|______________________________________________________|'
 slow 'trivy image --severity HIGH,CRITICAL $APP_IMAGE | grep git'
 trivy image --severity HIGH,CRITICAL $APP_IMAGE | grep git
 slow
-slow 'vexctl create --product="pkg:oci/toddysm/python@3.12.2" \
-              --subcomponents="pkg:deb/debian/git@2.39.2-1.1?arch=arm64&distro=debian-12.5&epoch=1" \
+slow 'vexctl create --product="pkg:oci/python" \
+              --subcomponents="pkg:deb/debian/git@2.39.2-1.1" \
               --author="Python Community" \
               --vuln="CVE-2024-32002" \
               --status="not_affected" \
               --justification="vulnerable_code_not_in_execute_path" \
               > ./vex/$BASE_IMAGE_FILE_NAME-CVE-2024-32002.vex.json
               
-$ vexctl create --product="pkg:oci/toddysm/python@3.12.2" \
-              --subcomponents="pkg:deb/debian/git@2.39.2-1.1?arch=arm64&distro=debian-12.5&epoch=1" \
+$ vexctl create --product="pkg:oci/python" \
+              --subcomponents="pkg:deb/debian/git@2.39.2-1.1" \
               --author="Python Community" \
               --vuln="CVE-2023-25652" \
               --status="not_affected" \
               --justification="vulnerable_code_not_in_execute_path" \
               > ./vex/$BASE_IMAGE_FILE_NAME-CVE-2023-25652.vex.json
 
-$ vexctl create --product="pkg:oci/toddysm/python@3.12.2" \
-              --subcomponents="pkg:deb/debian/git@2.39.2-1.1?arch=arm64&distro=debian-12.5&epoch=1" \
+$ vexctl create --product="pkg:oci/python" \
+              --subcomponents="pkg:deb/debian/git@2.39.2-1.1" \
               --author="Python Community" \
               --vuln="CVE-2023-29007" \
               --status="not_affected" \
               --justification="vulnerable_code_not_in_execute_path" \
               > ./vex/$BASE_IMAGE_FILE_NAME-CVE-2023-29007.vex.json
 
-$ vexctl create --product="pkg:oci/toddysm/python@3.12.2" \
-              --subcomponents="pkg:deb/debian/git@2.39.2-1.1?arch=arm64&distro=debian-12.5&epoch=1" \
+$ vexctl create --product="pkg:oci/python" \
+              --subcomponents="pkg:deb/debian/git@2.39.2-1.1" \
               --author="Python Community" \
               --vuln="CVE-2024-32004" \
               --status="not_affected" \
               --justification="vulnerable_code_not_in_execute_path" \
               > ./vex/$BASE_IMAGE_FILE_NAME-CVE-2024-32004.vex.json
 
-$ vexctl create --product="pkg:oci/toddysm/python@3.12.2" \
-              --subcomponents="pkg:deb/debian/git@2.39.2-1.1?arch=arm64&distro=debian-12.5&epoch=1" \
+$ vexctl create --product="pkg:oci/python" \
+              --subcomponents="pkg:deb/debian/git@2.39.2-1.1" \
               --author="Python Community" \
               --vuln="CVE-2024-32465" \
               --status="not_affected" \
               --justification="vulnerable_code_not_in_execute_path" \
               > ./vex/$BASE_IMAGE_FILE_NAME-CVE-2024-32465.vex.json'
 
-vexctl create --product="pkg:oci/toddysm/python@3.12.2" \
-              --subcomponents="pkg:deb/debian/git@2.39.2-1.1?arch=arm64&distro=debian-12.5&epoch=1" \
+vexctl create --product="pkg:oci/python" \
+              --subcomponents="pkg:deb/debian/git@2.39.2-1.1" \
               --author="Python Community" \
               --vuln="CVE-2024-32002" \
               --status="not_affected" \
               --justification="vulnerable_code_not_in_execute_path" \
               > ./vex/$BASE_IMAGE_FILE_NAME-CVE-2024-32002.vex.json
 
-vexctl create --product="pkg:oci/toddysm/python@3.12.2" \
-              --subcomponents="pkg:deb/debian/git@2.39.2-1.1?arch=arm64&distro=debian-12.5&epoch=1" \
+vexctl create --product="pkg:oci/python" \
+              --subcomponents="pkg:deb/debian/git@2.39.2-1.1" \
               --author="Python Community" \
               --vuln="CVE-2023-25652" \
               --status="not_affected" \
               --justification="vulnerable_code_not_in_execute_path" \
               > ./vex/$BASE_IMAGE_FILE_NAME-CVE-2023-25652.vex.json
 
-vexctl create --product="pkg:oci/toddysm/python@3.12.2" \
-              --subcomponents="pkg:deb/debian/git@2.39.2-1.1?arch=arm64&distro=debian-12.5&epoch=1" \
+vexctl create --product="pkg:oci/python" \
+              --subcomponents="pkg:deb/debian/git@2.39.2-1.1" \
               --author="Python Community" \
               --vuln="CVE-2023-29007" \
               --status="not_affected" \
               --justification="vulnerable_code_not_in_execute_path" \
               > ./vex/$BASE_IMAGE_FILE_NAME-CVE-2023-29007.vex.json
 
-vexctl create --product="pkg:oci/toddysm/python@3.12.2" \
-              --subcomponents="pkg:deb/debian/git@2.39.2-1.1?arch=arm64&distro=debian-12.5&epoch=1" \
+vexctl create --product="pkg:oci/python" \
+              --subcomponents="pkg:deb/debian/git@2.39.2-1.1" \
               --author="Python Community" \
               --vuln="CVE-2024-32004" \
               --status="not_affected" \
               --justification="vulnerable_code_not_in_execute_path" \
               > ./vex/$BASE_IMAGE_FILE_NAME-CVE-2024-32004.vex.json
 
-vexctl create --product="pkg:oci/toddysm/python@3.12.2" \
-              --subcomponents="pkg:deb/debian/git@2.39.2-1.1?arch=arm64&distro=debian-12.5&epoch=1" \
+vexctl create --product="pkg:oci/python" \
+              --subcomponents="pkg:deb/debian/git@2.39.2-1.1" \
               --author="Python Community" \
               --vuln="CVE-2024-32465" \
               --status="not_affected" \
@@ -181,6 +185,9 @@ slow
 slow 'oras attach --artifact-type "application/vnd.openvex.vex+json" $BASE_IMAGE ./vex/$BASE_IMAGE_FILE_NAME.vex.json'
 oras attach --artifact-type "application/vnd.openvex.vex+json" docker.io/$BASE_IMAGE ./vex/$BASE_IMAGE_FILE_NAME.vex.json
 slow
+slow 'oras discover docker.io/$BASE_IMAGE'
+oras discover docker.io/$BASE_IMAGE
+slow
 clear
 echo ' _______________________________________________________'
 echo '|  __________________________________________________  |'
@@ -189,3 +196,49 @@ echo '| |__________________________________________________| |'
 echo '|______________________________________________________|'
 slow 'trivy image --severity HIGH,CRITICAL --vex ./vex/$BASE_IMAGE_FILE_NAME.vex.json $BASE_IMAGE | grep Total'
 trivy image --severity HIGH,CRITICAL --vex ./vex/$BASE_IMAGE_FILE_NAME.vex.json $BASE_IMAGE | grep Total
+slow
+slow 'oras attach --artifact-type "application/vnd.openvex.vex+json" $APP_IMAGE ./vex/$BASE_IMAGE_FILE_NAME.vex.json'
+oras attach --artifact-type "application/vnd.openvex.vex+json" $APP_IMAGE ./vex/$BASE_IMAGE_FILE_NAME.vex.json
+slow
+slow 'oras discover $APP_IMAGE'
+oras discover $APP_IMAGE
+slow
+#slow 'trivy image --severity HIGH,CRITICAL --vex ./vex/$BASE_IMAGE_FILE_NAME.vex.json $APP_IMAGE | grep Total'
+#trivy image --severity HIGH,CRITICAL --vex ./vex/$BASE_IMAGE_FILE_NAME.vex.json $APP_IMAGE | grep Total
+#slow
+clear
+echo ' _______________________________________________________'
+echo '|  __________________________________________________  |'
+echo '| | Adding a CVEs exception...                       | |'
+echo '| |__________________________________________________| |'
+echo '|______________________________________________________|'
+slow 'oras attach --artifact-type "application/vnd.opa.rego" $APP_IMAGE ./policies/exception.rego'
+oras attach --artifact-type "application/vnd.opa.rego" $APP_IMAGE ./policies/exception.rego
+slow
+slow 'trivy image --severity HIGH,CRITICAL --ignore-policy ./policies/exception.rego $APP_IMAGE | grep Total'
+trivy image --severity HIGH,CRITICAL --ignore-policy ./policies/exception.rego $APP_IMAGE | grep Total
+slow
+clear
+echo ' _______________________________________________________'
+echo '|  __________________________________________________  |'
+echo '| | Let us fix all we can...                         | |'
+echo '| |__________________________________________________| |'
+echo '|______________________________________________________|'
+slow 'trivy image --ignore-unfixed --vuln-type os --format json --output ./vuln-reports/$APP_IMAGE_FILE_NAME.vuln-report.json $APP_IMAGE'
+trivy image --ignore-unfixed --vuln-type os --format json --output ./vuln-reports/$APP_IMAGE_FILE_NAME.vuln-report.json $APP_IMAGE
+slow
+slow 'copa patch -i $APP_IMAGE -r ./vuln-reports/$APP_IMAGE_FILE_NAME.vuln-report.json -t 1.0-patched'
+copa patch -i $APP_IMAGE -r ./vuln-reports/$APP_IMAGE_FILE_NAME.vuln-report.json -t 1.0-patched
+slow
+slow 'trivy image --severity HIGH,CRITICAL $PATCHED_IMAGE | grep Total'
+trivy image --severity HIGH,CRITICAL $PATCHED_IMAGE | grep Total
+slow
+clear
+echo ' _______________________________________________________'
+echo '|  __________________________________________________  |'
+echo '| | Let us put all together...                       | |'
+echo '| |__________________________________________________| |'
+echo '|______________________________________________________|'
+slow 'trivy image --severity HIGH,CRITICAL --ignore-policy ./policies/exception.rego $PATCHED_IMAGE | grep Total'
+trivy image --severity HIGH,CRITICAL --ignore-policy ./policies/exception.rego $PATCHED_IMAGE | grep Total
+slow
