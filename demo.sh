@@ -189,6 +189,21 @@ slow 'oras discover docker.io/$BASE_IMAGE'
 oras discover docker.io/$BASE_IMAGE
 slow
 clear
+echo ' ____________________________________________________________________'
+echo '|  _______________________________________________________________  |'
+echo '| | Let us use the same VEX document for the Flask application... | |'
+echo '| |_______________________________________________________________| |'
+echo '|___________________________________________________________________|'
+slow 'sed "s|pkg:oci/python|pkg:oci/flasksample|g" ./vex/$BASE_IMAGE_FILE_NAME.vex.json > ./vex/$APP_IMAGE_FILE_NAME.vex.json'
+sed "s|pkg:oci/python|pkg:oci/flasksample|g" ./vex/$BASE_IMAGE_FILE_NAME.vex.json > ./vex/$APP_IMAGE_FILE_NAME.vex.json
+slow
+slow 'oras attach --artifact-type "application/vnd.openvex.vex+json" $APP_IMAGE ./vex/$APP_IMAGE_FILE_NAME.vex.json'
+oras attach --artifact-type "application/vnd.openvex.vex+json" docker.io/$APP_IMAGE ./vex/$APP_IMAGE_FILE_NAME.vex.json
+slow
+slow 'oras discover $APP_IMAGE'
+oras discover $APP_IMAGE
+slow
+clear
 echo ' _______________________________________________________'
 echo '|  __________________________________________________  |'
 echo '| | How many CVEs are left...                        | |'
@@ -197,15 +212,9 @@ echo '|______________________________________________________|'
 slow 'trivy image --severity HIGH,CRITICAL --vex ./vex/$BASE_IMAGE_FILE_NAME.vex.json $BASE_IMAGE | grep Total'
 trivy image --severity HIGH,CRITICAL --vex ./vex/$BASE_IMAGE_FILE_NAME.vex.json $BASE_IMAGE | grep Total
 slow
-slow 'oras attach --artifact-type "application/vnd.openvex.vex+json" $APP_IMAGE ./vex/$BASE_IMAGE_FILE_NAME.vex.json'
-oras attach --artifact-type "application/vnd.openvex.vex+json" $APP_IMAGE ./vex/$BASE_IMAGE_FILE_NAME.vex.json
+slow 'trivy image --severity HIGH,CRITICAL --vex ./vex/$APP_IMAGE_FILE_NAME.vex.json $APP_IMAGE | grep Total'
+trivy image --severity HIGH,CRITICAL --vex ./vex/$APP_IMAGE_FILE_NAME.vex.json $APP_IMAGE | grep Total
 slow
-slow 'oras discover $APP_IMAGE'
-oras discover $APP_IMAGE
-slow
-#slow 'trivy image --severity HIGH,CRITICAL --vex ./vex/$BASE_IMAGE_FILE_NAME.vex.json $APP_IMAGE | grep Total'
-#trivy image --severity HIGH,CRITICAL --vex ./vex/$BASE_IMAGE_FILE_NAME.vex.json $APP_IMAGE | grep Total
-#slow
 clear
 echo ' _______________________________________________________'
 echo '|  __________________________________________________  |'
