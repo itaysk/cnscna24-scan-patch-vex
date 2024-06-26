@@ -198,7 +198,7 @@ slow 'sed "s|pkg:oci/python|pkg:oci/flasksample|g" ./vex/$BASE_IMAGE_FILE_NAME.v
 sed "s|pkg:oci/python|pkg:oci/flasksample|g" ./vex/$BASE_IMAGE_FILE_NAME.vex.json > ./vex/$APP_IMAGE_FILE_NAME.vex.json
 slow
 slow 'oras attach --artifact-type "application/vnd.openvex.vex+json" $APP_IMAGE ./vex/$APP_IMAGE_FILE_NAME.vex.json'
-oras attach --artifact-type "application/vnd.openvex.vex+json" docker.io/$APP_IMAGE ./vex/$APP_IMAGE_FILE_NAME.vex.json
+oras attach --artifact-type "application/vnd.openvex.vex+json" $APP_IMAGE ./vex/$APP_IMAGE_FILE_NAME.vex.json
 slow
 slow 'oras discover $APP_IMAGE'
 oras discover $APP_IMAGE
