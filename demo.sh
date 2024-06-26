@@ -221,11 +221,11 @@ echo '|  __________________________________________________  |'
 echo '| | Adding a CVEs exception...                       | |'
 echo '| |__________________________________________________| |'
 echo '|______________________________________________________|'
-slow 'oras attach --artifact-type "application/vnd.opa.rego" $APP_IMAGE ./policies/exception.rego'
-oras attach --artifact-type "application/vnd.opa.rego" $APP_IMAGE ./policies/exception.rego
+slow 'oras attach --artifact-type "application/vnd.opa.rego" $APP_IMAGE ./trivyignore.rego'
+oras attach --artifact-type "application/vnd.opa.rego" $APP_IMAGE ./trivyignore.rego
 slow
-slow 'trivy image --severity HIGH,CRITICAL --ignore-policy ./policies/exception.rego $APP_IMAGE | grep Total'
-trivy image --severity HIGH,CRITICAL --ignore-policy ./policies/exception.rego $APP_IMAGE | grep Total
+slow 'trivy image --severity HIGH,CRITICAL --ignore-policy ./trivyignore.rego $APP_IMAGE | grep Total'
+trivy image --severity HIGH,CRITICAL --ignore-policy ./trivyignore.rego $APP_IMAGE | grep Total
 slow
 clear
 echo ' _______________________________________________________'
@@ -248,6 +248,6 @@ echo '|  __________________________________________________  |'
 echo '| | Let us put all together...                       | |'
 echo '| |__________________________________________________| |'
 echo '|______________________________________________________|'
-slow 'trivy image --severity HIGH,CRITICAL --ignore-policy ./policies/exception.rego $PATCHED_IMAGE | grep Total'
-trivy image --severity HIGH,CRITICAL --ignore-policy ./policies/exception.rego $PATCHED_IMAGE | grep Total
+slow 'trivy image --severity HIGH,CRITICAL --ignore-policy ./trivyignore.rego $PATCHED_IMAGE | grep Total'
+trivy image --severity HIGH,CRITICAL --ignore-policy ./trivyignore.rego $PATCHED_IMAGE | grep Total
 slow
