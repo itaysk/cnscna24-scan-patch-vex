@@ -6,8 +6,7 @@ dateLayout := "2006-Jan-02"
 default ignore = false
 
 allowedCVEs := {
-  "CVE-2023-45853",
-  "CVE-2024-28085"
+  "CVE-2023-30861"
 }
  
 ignore if {
