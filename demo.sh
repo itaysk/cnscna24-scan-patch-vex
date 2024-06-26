@@ -187,7 +187,7 @@ oras attach --artifact-type "application/vnd.openvex.vex+json" docker.io/$BASE_I
 slow
 # slow 'oras discover docker.io/$BASE_IMAGE'
 # oras discover docker.io/$BASE_IMAGE
-slow
+# slow
 clear
 echo ' ____________________________________________________________________'
 echo '|  _______________________________________________________________  |'
@@ -202,7 +202,7 @@ oras attach --artifact-type "application/vnd.openvex.vex+json" $APP_IMAGE ./vex/
 slow
 # slow 'oras discover $APP_IMAGE'
 # oras discover $APP_IMAGE
-slow
+# slow
 clear
 echo ' _______________________________________________________'
 echo '|  __________________________________________________  |'
